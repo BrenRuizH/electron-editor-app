@@ -12,25 +12,30 @@ const template = [
                 }
             }
         ]
-    },
-    {
-        label: 'Debugging',
-        submenu: [
-            {
-                role: 'toggledevtools'
-            },
-            {
-                role: 'reload'
-            },
-            {
-                type: 'separator'
-            },
-            {
-                role: 'quit'
-            }
-        ]
     }
 ];
+
+if(process.env.DEBUG) {
+    template.push(
+        {
+            label: 'Debugging',
+            submenu: [
+                {
+                    role: 'toggledevtools'
+                },
+                {
+                    role: 'reload'
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    role: 'quit'
+                }
+            ]
+        }
+    );
+}
 
 const menu = Menu.buildFromTemplate(template);
 
