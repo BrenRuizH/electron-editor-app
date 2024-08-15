@@ -10,9 +10,23 @@ const template = [
                     //console.log("Hola Mundo");
                     shell.openExternal("https://www.electronjs.org");
                 }
-            },
+            }
+        ]
+    },
+    {
+        label: 'Debugging',
+        submenu: [
             {
                 role: 'toggledevtools'
+            },
+            {
+                role: 'reload'
+            },
+            {
+                type: 'separator'
+            },
+            {
+                role: 'quit'
             }
         ]
     }
