@@ -25,7 +25,11 @@
     <textarea id="MyID"></textarea>
 
     <script>
+        const { ipcRenderer } = require('electron');
+
         var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
+
+        ipcRenderer.send('editor-channel', 'Pagina cargada');
     </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const { Menu, shell } = require('electron');
+const { Menu, shell, ipcMain } = require('electron');
 
 const template = [
     {
@@ -59,6 +59,10 @@ if(process.platform == 'win32') {
         }
     );
 }
+
+ipcMain.on('editor-channel', (event, arg) => {
+    console.log("Mensaje recibido del canal 'editor-channel': ", arg);
+})
 
 const menu = Menu.buildFromTemplate(template);
 
