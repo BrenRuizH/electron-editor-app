@@ -46,7 +46,8 @@ if(process.platform == 'win32') {
                     role: 'toggledevtools'
                 },
                 {
-                    role: 'reload'
+                    role: 'reload',
+                    accelerator: 'Alt+C'
                 },
                 {
                     type: 'separator'
