@@ -1,16 +1,19 @@
 {
-  "name": "1",
+  "name": "editorapp",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "dev:win": "electron-builder --windows --dir",
+    "pro:win": "electron-builder --windows"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^31.3.1"
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3"
   },
   "dependencies": {
     "simplemde": "^1.11.2"
