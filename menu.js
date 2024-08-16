@@ -37,6 +37,28 @@ if(process.env.DEBUG) {
     );
 }
 
+if(process.platform == 'win32') {
+    template.push(
+        {
+            label: 'Windows',
+            submenu: [
+                {
+                    role: 'toggledevtools'
+                },
+                {
+                    role: 'reload'
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    role: 'quit'
+                }
+            ]
+        }
+    );
+}
+
 const menu = Menu.buildFromTemplate(template);
 
 module.exports = menu;
