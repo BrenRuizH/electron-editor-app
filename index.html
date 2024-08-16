@@ -30,6 +30,10 @@
         var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
 
         ipcRenderer.send('editor-channel', 'Pagina cargada');
+
+        ipcRenderer.on('editor-channel', (event, arg) => {
+            console.log("Mensaje recibido desde el proceso principal: ", arg);
+        })
     </script>
 </body>
 </html>

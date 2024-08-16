@@ -1,4 +1,4 @@
-const { Menu, shell, ipcMain } = require('electron');
+const { Menu, shell, ipcMain, BrowserWindow } = require('electron');
 
 const template = [
     {
@@ -9,6 +9,19 @@ const template = [
                 click() {
                     //console.log("Hola Mundo");
                     shell.openExternal("https://www.electronjs.org");
+                }
+            }
+        ]
+    },
+    {
+        label: 'Estilo',
+        submenu: [
+            {
+                label: 'Negritas',
+                click() {
+                    //console.log("Negritas");
+                    const win = BrowserWindow.getFocusedWindow();
+                    win.webContents.send('editor-channel', 'style-bold');
                 }
             }
         ]
