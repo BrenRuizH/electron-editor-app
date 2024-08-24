@@ -1,5 +1,7 @@
 const { app, Menu, shell, ipcMain, BrowserWindow, globalShortcut, dialog } = require('electron');
 
+const fs = require('fs');
+
 const template = [
     {
         role: 'help',
@@ -119,7 +121,11 @@ app.on('ready', () => {
             ]
         }
 
-        console.log(dialog.showSaveDialogSync(win, option));
+        path = dialog.showSaveDialogSync(win, option);
+
+        fs.writeFileSync(path, "Hola mundo");
+
+        
         /* dialog.showSaveDialog(win, option).then(result => {
             console.log(result.canceled);
             console.log(result.filePath);
