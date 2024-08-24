@@ -1,4 +1,4 @@
-const { app, Menu, shell, ipcMain, BrowserWindow } = require('electron');
+const { app, Menu, shell, ipcMain, BrowserWindow, globalShortcut } = require('electron');
 
 const template = [
     {
@@ -102,7 +102,15 @@ ipcMain.on('editor-channel', (event, arg) => {
 
 app.on('ready', () => {
     console.log("App Lista");
+
+    const ret = globalShortcut.register('CommandOrControl+Shift+S', () => {
+        console.log('Guardar');
+
+        const win = BrowserWindow.getFocusedWindow();
+        win.webContents.send('editor-channel', 'file-save');
+    });
 });
+
 
 const menu = Menu.buildFromTemplate(template);
 

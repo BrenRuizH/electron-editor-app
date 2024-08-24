@@ -34,6 +34,10 @@
         ipcRenderer.on('editor-channel', (event, arg) => {
             console.log("Mensaje recibido desde el proceso principal: ", arg);
 
+            editorOptions(event, arg);
+        });
+
+        function editorOptions(event, arg) {
             switch (arg) {
                 case 'style-bold':
                     simplemde.toggleBold();
@@ -47,8 +51,12 @@
                 case 'style-h2':
                     simplemde.toggleHeading2();
                     break;
+                case 'file-save':
+                    console.log(simplemde.value());
+                    event.sender.send('editor-channel', simplemde.value());
+                    break;
             }
-        });
+        }
     </script>
 </body>
 </html>
