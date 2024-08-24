@@ -1,4 +1,4 @@
-const { app, Menu, shell, ipcMain, BrowserWindow, globalShortcut } = require('electron');
+const { app, Menu, shell, ipcMain, BrowserWindow, globalShortcut, dialog } = require('electron');
 
 const template = [
     {
@@ -108,6 +108,22 @@ app.on('ready', () => {
 
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('editor-channel', 'file-save');
+
+        const option = {
+            title: "Guardar archivo",
+            filters: [
+                {
+                    name: "archivo",
+                    extensions: ['txt']
+                }
+            ]
+        }
+
+        //console.log(dialog.showSaveDialogSync(win, option));
+        dialog.showSaveDialog(win, option).then(result => {
+            console.log(result.canceled);
+            console.log(result.filePath);
+        });
     });
 });
 
