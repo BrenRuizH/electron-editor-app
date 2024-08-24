@@ -1,4 +1,4 @@
-const { Menu, shell, ipcMain, BrowserWindow } = require('electron');
+const { app, Menu, shell, ipcMain, BrowserWindow } = require('electron');
 
 const template = [
     {
@@ -99,6 +99,10 @@ if(process.platform == 'win32') {
 ipcMain.on('editor-channel', (event, arg) => {
     console.log("Mensaje recibido del canal 'editor-channel': ", arg);
 })
+
+app.on('ready', () => {
+    console.log("App Lista");
+});
 
 const menu = Menu.buildFromTemplate(template);
 
