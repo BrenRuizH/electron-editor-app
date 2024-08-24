@@ -119,14 +119,15 @@ app.on('ready', () => {
             ]
         }
 
-        //console.log(dialog.showSaveDialogSync(win, option));
-        dialog.showSaveDialog(win, option).then(result => {
+        console.log(dialog.showSaveDialogSync(win, option));
+        /* dialog.showSaveDialog(win, option).then(result => {
             console.log(result.canceled);
             console.log(result.filePath);
-        });
+        }); */
+
+        console.log("Luego del dialogo");
     });
 });
-
 
 const menu = Menu.buildFromTemplate(template);
 
