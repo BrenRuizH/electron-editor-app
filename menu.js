@@ -14,14 +14,37 @@ const template = [
         ]
     },
     {
-        label: 'Estilo',
+        label: 'Estilo y Formato',
         submenu: [
             {
                 label: 'Negritas',
                 click() {
-                    //console.log("Negritas");
                     const win = BrowserWindow.getFocusedWindow();
                     win.webContents.send('editor-channel', 'style-bold');
+                }
+            },
+            {
+                label: 'Italica',
+                click() {
+                    const win = BrowserWindow.getFocusedWindow();
+                    win.webContents.send('editor-channel', 'style-italic');
+                }
+            },
+            {
+                type: 'separator'
+            },
+            {
+                label: 'H1',
+                click() {
+                    const win = BrowserWindow.getFocusedWindow();
+                    win.webContents.send('editor-channel', 'style-h1');
+                }
+            },
+            {
+                label: 'H2',
+                click() {
+                    const win = BrowserWindow.getFocusedWindow();
+                    win.webContents.send('editor-channel', 'style-h2');
                 }
             }
         ]

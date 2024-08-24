@@ -33,7 +33,22 @@
 
         ipcRenderer.on('editor-channel', (event, arg) => {
             console.log("Mensaje recibido desde el proceso principal: ", arg);
-        })
+
+            switch (arg) {
+                case 'style-bold':
+                    simplemde.toggleBold();
+                    break;
+                case 'style-italic':
+                    simplemde.toggleItalic();
+                    break;
+                case 'style-h1':
+                    simplemde.toggleHeading1();
+                    break;
+                case 'style-h2':
+                    simplemde.toggleHeading2();
+                    break;
+            }
+        });
     </script>
 </body>
 </html>
