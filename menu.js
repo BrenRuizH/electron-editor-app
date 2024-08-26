@@ -100,7 +100,35 @@ if(process.platform == 'win32') {
 
 ipcMain.on('editor-channel', (event, arg) => {
     console.log("Mensaje recibido del canal 'editor-channel': ", arg);
-})
+});
+
+ipcMain.on('file-save', (event, arg) => {
+    console.log("Mensaje recibido del canal 'file-save': ", arg);
+
+    const win = BrowserWindow.getFocusedWindow();
+
+    const option = {
+        title: "Guardar archivo",
+        filters: [
+            {
+                name: "archivo",
+                extensions: ['txt']
+            }
+        ]
+    }
+
+    path = dialog.showSaveDialogSync(win, option);
+
+    fs.writeFileSync(path, arg);
+
+    
+    /* dialog.showSaveDialog(win, option).then(result => {
+        console.log(result.canceled);
+        console.log(result.filePath);
+    }); */
+
+    console.log("Luego del dialogo");
+});
 
 app.on('ready', () => {
     console.log("App Lista");
@@ -111,27 +139,7 @@ app.on('ready', () => {
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('editor-channel', 'file-save');
 
-        const option = {
-            title: "Guardar archivo",
-            filters: [
-                {
-                    name: "archivo",
-                    extensions: ['txt']
-                }
-            ]
-        }
-
-        path = dialog.showSaveDialogSync(win, option);
-
-        fs.writeFileSync(path, "Hola mundo");
-
         
-        /* dialog.showSaveDialog(win, option).then(result => {
-            console.log(result.canceled);
-            console.log(result.filePath);
-        }); */
-
-        console.log("Luego del dialogo");
     });
 });
 

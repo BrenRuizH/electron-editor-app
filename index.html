@@ -53,7 +53,7 @@
                     break;
                 case 'file-save':
                     console.log(simplemde.value());
-                    event.sender.send('editor-channel', simplemde.value());
+                    event.sender.send('file-save', simplemde.value());
                     break;
             }
         }
