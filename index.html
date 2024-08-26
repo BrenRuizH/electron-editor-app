@@ -31,6 +31,12 @@
 
         ipcRenderer.send('editor-channel', 'Pagina cargada');
 
+        ipcRenderer.on('file-open', (event, arg) => {
+            console.log("Mensaje recibido desde el proceso principal: ", arg);
+
+            simplemde.value(arg);
+        });
+
         ipcRenderer.on('editor-channel', (event, arg) => {
             console.log("Mensaje recibido desde el proceso principal: ", arg);
 

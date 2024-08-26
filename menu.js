@@ -1,6 +1,7 @@
 const { app, Menu, shell, ipcMain, BrowserWindow, globalShortcut, dialog } = require('electron');
 
 const fs = require('fs');
+const path = require('path');
 
 const template = [
     {
@@ -132,14 +133,34 @@ ipcMain.on('file-save', (event, arg) => {
 
 app.on('ready', () => {
     console.log("App Lista");
-
-    const ret = globalShortcut.register('CommandOrControl+Shift+S', () => {
-        console.log('Guardar');
-
+    
+    globalShortcut.register('CommandOrControl+Shift+S', () => {
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('editor-channel', 'file-save');
+    });
 
-        
+    globalShortcut.register('CommandOrControl+Shift+O', () => {
+        const win = BrowserWindow.getFocusedWindow();
+
+        const option = {
+            title: "Abrir archivo",
+            filters: [
+                {
+                    name: "archivo",
+                    extensions: ['txt']
+                }
+            ]
+        }
+
+        const paths = dialog.showOpenDialogSync(win, option);
+
+        if (paths && paths.length > 0) {
+            const content = fs.readFileSync(paths[0]).toString();
+
+            console.log(content);
+            const win = BrowserWindow.getFocusedWindow();
+            win.webContents.send('file-open', content);
+        }
     });
 });
 
