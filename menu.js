@@ -125,6 +125,11 @@ ipcMain.on('editor-channel', (event, arg) => {
     console.log("Mensaje recibido del canal 'editor-channel': ", arg);
 });
 
+ipcMain.on('file-open', (event, arg) => {
+    const win = BrowserWindow.getFocusedWindow();
+        open_file(win);
+});
+
 ipcMain.on('file-save', (event, arg) => {
     console.log("Mensaje recibido del canal 'file-save': ", arg);
 

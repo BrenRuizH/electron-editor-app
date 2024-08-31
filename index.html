@@ -22,7 +22,7 @@
         }
     </style>
 
-    <button>Abrir</button>
+    <button onclick="openFile()">Abrir</button>
     <button onclick="darkMode()">Dark Mode</button>
 
     <textarea id="MyID"></textarea>
@@ -34,6 +34,10 @@
 
         function darkMode() {
             document.querySelector(".CodeMirror").style.background = "black";
+        }
+
+        function openFile() {
+            ipcRenderer.send('file-open', 'file-open');
         }
 
         ipcRenderer.on('title-change', (event, arg) => {
