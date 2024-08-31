@@ -40,6 +40,23 @@
             ipcRenderer.send('file-open', 'file-open');
         }
 
+        document.ondrop = function(event) {
+            event.preventDefault();
+
+            if(event.dataTransfer.items) {
+                item = event.dataTransfer.items[0];
+                if(item.kind == "file" & item.type == "text/plain") {
+                    var reader  = new FileReader();
+                    var file = item.getAsFile();
+                    reader.onload = e => {
+                        //console.log(e.target.result);
+                        simplemde.value("Hola " + e.target.result)
+                    }
+                    reader.readAsText(file);
+                } 
+            }
+        }
+
         ipcRenderer.on('title-change', (event, arg) => {
             document.title = arg;
         })
