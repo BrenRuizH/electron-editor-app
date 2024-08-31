@@ -1,5 +1,6 @@
 const { dialog } = require('electron');
 const fs = require('fs');
+const path = require('path');
 
 module.exports.open_file = function(win) {
     const option = {
@@ -17,6 +18,9 @@ module.exports.open_file = function(win) {
     if (paths && paths.length > 0) {
         const content = fs.readFileSync(paths[0]).toString();
         win.webContents.send('file-open', content);
+
+        var filename = path.basename(paths[0]);
+        win.webContents.send('title-change', filename);
     }
 }
 
