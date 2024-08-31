@@ -18,6 +18,27 @@ const template = [
         ]
     },
     {
+        label: 'Archivo',
+        submenu: [
+            {
+                label: "Guardar",
+                accelerator: "CommandOrControl+Shift+S",
+                click() {
+                    const win = BrowserWindow.getFocusedWindow();
+                    win.webContents.send('editor-channel', 'file-save');
+                }
+            },
+            {
+                label: "Abrir",
+                accelerator: "CommandOrControl+Shift+O",
+                click() {
+                    const win = BrowserWindow.getFocusedWindow();
+                    open_file(win);
+                }
+            }
+        ]
+    },
+    {
         label: 'Estilo y Formato',
         submenu: [
             {
