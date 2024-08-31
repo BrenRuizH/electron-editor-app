@@ -2,6 +2,7 @@ const { app, Menu, shell, ipcMain, BrowserWindow, globalShortcut, dialog } = req
 
 const fs = require('fs');
 const path = require('path');
+const { open_file, save_file } = require("./editor-options");
 
 const template = [
     {
@@ -108,27 +109,7 @@ ipcMain.on('file-save', (event, arg) => {
 
     const win = BrowserWindow.getFocusedWindow();
 
-    const option = {
-        title: "Guardar archivo",
-        filters: [
-            {
-                name: "archivo",
-                extensions: ['txt']
-            }
-        ]
-    }
-
-    path = dialog.showSaveDialogSync(win, option);
-
-    fs.writeFileSync(path, arg);
-
-    
-    /* dialog.showSaveDialog(win, option).then(result => {
-        console.log(result.canceled);
-        console.log(result.filePath);
-    }); */
-
-    console.log("Luego del dialogo");
+    save_file(win, arg);
 });
 
 app.on('ready', () => {
@@ -141,26 +122,7 @@ app.on('ready', () => {
 
     globalShortcut.register('CommandOrControl+Shift+O', () => {
         const win = BrowserWindow.getFocusedWindow();
-
-        const option = {
-            title: "Abrir archivo",
-            filters: [
-                {
-                    name: "archivo",
-                    extensions: ['txt']
-                }
-            ]
-        }
-
-        const paths = dialog.showOpenDialogSync(win, option);
-
-        if (paths && paths.length > 0) {
-            const content = fs.readFileSync(paths[0]).toString();
-
-            console.log(content);
-            const win = BrowserWindow.getFocusedWindow();
-            win.webContents.send('file-open', content);
-        }
+        open_file(win);
     });
 });
 
