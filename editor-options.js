@@ -1,4 +1,4 @@
-const { dialog } = require('electron');
+const { app, dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,7 +20,7 @@ module.exports.open_file = function(win) {
         win.webContents.send('file-open', content);
 
         var filename = path.basename(paths[0]);
-        win.webContents.send('title-change', filename);
+        win.webContents.send('title-change', app.name + " " + filename);
     }
 }
 
