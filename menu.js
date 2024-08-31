@@ -143,7 +143,7 @@ app.on('ready', () => {
     
     globalShortcut.register('CommandOrControl+Shift+S', () => {
         const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('editor-channel', 'file-save');
+        win.webContents.send('editorchannel', 'file-save');
     });
 
     globalShortcut.register('CommandOrControl+Shift+O', () => {

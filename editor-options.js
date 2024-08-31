@@ -35,7 +35,7 @@ module.exports.save_file = function(win, data) {
         ]
     }
 
-    path = dialog.showSaveDialogSync(win, option);
+    const path = dialog.showSaveDialogSync(win, option);
 
     fs.writeFileSync(path, data);
 
