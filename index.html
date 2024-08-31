@@ -22,12 +22,19 @@
         }
     </style>
 
+    <button>Abrir</button>
+    <button onclick="darkMode()">Dark Mode</button>
+
     <textarea id="MyID"></textarea>
 
     <script>
         const { ipcRenderer } = require('electron');
 
         var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
+
+        function darkMode() {
+            document.querySelector(".CodeMirror").style.background = "black";
+        }
 
         ipcRenderer.send('editor-channel', 'Pagina cargada');
 
